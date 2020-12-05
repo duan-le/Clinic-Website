@@ -59,4 +59,17 @@
 				return false;
 			}
 		}
+
+		public function delete() {
+			$query = 'DELETE FROM ' . $this->table . ' WHERE employee_id = ?';
+			$stmt = $this->conn->prepare($query);
+			$this->employee_id = htmlspecialchars(strip_tags($this->employee_id));
+			$stmt->bindParam(1, $this->employee_id);
+			if ($stmt->execute()) {
+				return true;
+			} else {
+				printf("Error: %s.\n", $stmt->error);
+				return false;
+			}
+		}
 	}
