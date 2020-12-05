@@ -17,4 +17,12 @@
 			$stmt->execute();
 			return $stmt;
 		}
+
+		public function search() {
+			$query = 'SELECT * FROM ' . $this->table . ' WHERE employee_id = ?';
+			$stmt = $this->conn->prepare($query);
+			$stmt->bindParam(1, $this->employee_id);
+			$stmt->execute();
+			return $stmt;
+		}
 	}
