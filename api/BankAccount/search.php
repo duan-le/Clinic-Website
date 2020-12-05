@@ -1,5 +1,4 @@
 <?php 
-  // Headers
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
 
@@ -9,6 +8,7 @@
   $database = new Database();
   $db = $database->connect();
 	$bank_account = new BankAccount($db);
+	
 	$bank_account->employee_id = isset($_GET['employee_id']) ? $_GET['employee_id'] : die();
   $result = $bank_account->view();
   $num = $result->rowCount();
@@ -31,4 +31,5 @@
 		echo json_encode(
 			array('message' => 'No Bank Account Found')
 		);
-  }
+	}
+	
