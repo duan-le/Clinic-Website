@@ -15,7 +15,7 @@
   $product_receipt->product_id = $data->product_id;
   $product_receipt->receipt_number = $data->receipt_number;
 
-  if ($product_receipt->delete()) {
+  if ($product_receipt->insert()) {
     echo json_encode(
       array('message' => 'Product Receipt Created')
     );

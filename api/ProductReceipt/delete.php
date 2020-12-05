@@ -1,26 +1,26 @@
 <?php 
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
-  header('Access-Control-Allow-Methods: POST');
+  header('Access-Control-Allow-Methods: DELETE');
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../../config/Database.php';
-  include_once '../../models/ProductReceipt.php';
+  include_once '../../models/Calendar.php';
 
   $database = new Database();
   $db = $database->connect();
-	$product_receipt = new ProductReceipt($db);
+	$calendar = new Calendar($db);
   $data = json_decode(file_get_contents("php://input"));
   
-  $product_receipt->product_id = $data->product_id;
-  $product_receipt->receipt_number = $data->receipt_number;
+  $calendar->month = $data->month;
+  $calendar->year = $data->year;
 
-  if ($product_receipt->delete()) {
+  if ($calendar->delete()) {
     echo json_encode(
-      array('message' => 'Product Receipt Created')
+      array('message' => 'Calendar Deleted')
     );
   } else {
     echo json_encode(
-      array('message' => 'Product Receipt Not Created')
+      array('message' => 'Calendar Not Deleted')
     );
   }
