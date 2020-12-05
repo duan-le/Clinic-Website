@@ -1,13 +1,11 @@
 <?php 
   class Database {
-    // DB Params
     private $host = 'localhost';
     private $db_name = 'massage_clinic';
     private $username = 'root';
     private $password = 'password';
     private $conn;
 
-    // DB Connect
     public function connect() {
       $this->conn = null;
 
