@@ -10,7 +10,7 @@
 	$bank_account = new BankAccount($db);
 	
 	$bank_account->employee_id = isset($_GET['employee_id']) ? $_GET['employee_id'] : die();
-  $result = $bank_account->view();
+  $result = $bank_account->search();
   $num = $result->rowCount();
 
   if ($num > 0) {
