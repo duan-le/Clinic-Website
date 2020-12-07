@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 07, 2020 at 04:40 AM
+-- Generation Time: Dec 07, 2020 at 08:18 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -362,7 +362,7 @@ ALTER TABLE `appointment`
 -- Indexes for table `bank_account`
 --
 ALTER TABLE `bank_account`
-  ADD PRIMARY KEY (`account_number`),
+  ADD PRIMARY KEY (`employee_id`),
   ADD KEY `fk_employee_id_idx` (`employee_id`),
   ADD KEY `fk_employee_id_bank_idx` (`employee_id`);
 
@@ -452,12 +452,6 @@ ALTER TABLE `service_receipt`
 --
 ALTER TABLE `appointment`
   MODIFY `appoint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `bank_account`
---
-ALTER TABLE `bank_account`
-  MODIFY `account_number` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `client`
