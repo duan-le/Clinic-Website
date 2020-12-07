@@ -5,22 +5,22 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../../config/Database.php';
-  include_once '../../model/ProductReceipt.php';
+  include_once '../../model/Calendar.php';
 
   $database = new Database();
   $db = $database->connect();
-	$product_receipt = new ProductReceipt($db);
+	$calendar = new Calendar($db);
   $data = json_decode(file_get_contents("php://input"));
   
-  $product_receipt->product_id = $data->product_id;
-  $product_receipt->receipt_number = $data->receipt_number;
+  $calendar->product_id = $data->product_id;
+  $calendar->receipt_number = $data->receipt_number;
 
-  if ($product_receipt->delete()) {
+  if ($calendar->delete()) {
     echo json_encode(
-      array('message' => 'Product Receipt Created')
+      array('message' => 'Calendar Created')
     );
   } else {
     echo json_encode(
-      array('message' => 'Product Receipt Not Created')
+      array('message' => 'Calendar Not Created')
     );
   }
