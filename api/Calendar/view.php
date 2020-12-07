@@ -3,7 +3,7 @@
   header('Content-Type: application/json');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Calendar.php';
+  include_once '../../model/Calendar.php';
 
   $database = new Database();
   $db = $database->connect();
