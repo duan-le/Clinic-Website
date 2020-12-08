@@ -17,10 +17,10 @@
 
   if ($sells->insert()) {
     echo json_encode(
-      array('message' => 'sell Created')
+      array('message' => 'Sells Created')
     );
   } else {
     echo json_encode(
-      array('message' => 'Sell Not Created')
+      array('message' => 'Sells Not Created')
     );
   }

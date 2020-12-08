@@ -1,6 +1,5 @@
 <?php
   class Appointment {
-
     private $conn;
     private $table = 'appointment';
 
@@ -52,7 +51,10 @@
       $stmt->bindParam(7, $this->employee_id);
       $stmt->bindParam(8, $this->service_name);
 			if ($stmt->execute()) {
-				return true;
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
 			} else {
 				printf("Error: %s.\n", $stmt->error);
 				return false;
@@ -79,7 +81,10 @@
       $stmt->bindParam(6, $this->employee_id);
       $stmt->bindParam(7, $this->service_name);
 			if ($stmt->execute()) {
-				return true;
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
 			} else {
 				printf("Error: %s.\n", $stmt->error);
 				return false;
@@ -92,7 +97,10 @@
 			$this->appoint_id = htmlspecialchars(strip_tags($this->appoint_id));
 			$stmt->bindParam(1, $this->appoint_id);
 			if ($stmt->execute()) {
-				return true;
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
 			} else {
 				printf("Error: %s.\n", $stmt->error);
 				return false;

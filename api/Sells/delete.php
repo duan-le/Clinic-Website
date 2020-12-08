@@ -17,10 +17,10 @@
 
   if ($sells->delete()) {
     echo json_encode(
-      array('message' => 'Sell Deleted')
+      array('message' => 'Sells Deleted')
     );
   } else {
     echo json_encode(
-      array('message' => 'Sell Not Deleted')
+      array('message' => 'Sells Not Deleted')
     );
   }

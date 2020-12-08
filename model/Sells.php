@@ -33,7 +33,10 @@
 			$stmt->bindParam(1, $this->dnumber);
 			$stmt->bindParam(2, $this->product_id);
 			if ($stmt->execute()) {
-				return true;
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
 			} else {
 				printf("Error: %s.\n", $stmt->error);
 				return false;
@@ -48,7 +51,10 @@
 			$stmt->bindParam(1, $this->dnumber);
 			$stmt->bindParam(2, $this->product_id);
 			if ($stmt->execute()) {
-				return true;
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
 			} else {
 				printf("Error: %s.\n", $stmt->error);
 				return false;

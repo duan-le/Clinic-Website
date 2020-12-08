@@ -17,10 +17,10 @@
 
   if ($hp->insert()) {
     echo json_encode(
-      array('message' => 'health report inserted')
+      array('message' => 'Health Report Created')
     );
   } else {
     echo json_encode(
-      array('message' => 'health report not inserted')
+      array('message' => 'Health Report Not Created')
     );
   }

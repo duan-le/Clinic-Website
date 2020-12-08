@@ -34,7 +34,10 @@
 			$stmt->bindParam(1, $this->month);
 			$stmt->bindParam(2, $this->year);
 			if ($stmt->execute()) {
-				return true;
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
 			} else {
 				printf("Error: %s.\n", $stmt->error);
 				return false;
@@ -49,7 +52,10 @@
 			$stmt->bindParam(1, $this->month);
 			$stmt->bindParam(2, $this->year);
 			if ($stmt->execute()) {
-				return true;
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
 			} else {
 				printf("Error: %s.\n", $stmt->error);
 				return false;

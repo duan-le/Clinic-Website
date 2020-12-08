@@ -36,7 +36,10 @@
 			$stmt->bindParam(2, $this->account_type);
 			$stmt->bindParam(3, $this->employee_id);
 			if ($stmt->execute()) {
-				return true;
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
 			} else {
 				printf("Error: %s.\n", $stmt->error);
 				return false;
@@ -53,7 +56,10 @@
 			$stmt->bindParam(2, $this->account_type);
 			$stmt->bindParam(3, $this->employee_id);
 			if ($stmt->execute()) {
-				return true;
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
 			} else {
 				printf("Error: %s.\n", $stmt->error);
 				return false;
@@ -66,7 +72,10 @@
 			$this->employee_id = htmlspecialchars(strip_tags($this->employee_id));
 			$stmt->bindParam(1, $this->employee_id);
 			if ($stmt->execute()) {
-				return true;
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
 			} else {
 				printf("Error: %s.\n", $stmt->error);
 				return false;

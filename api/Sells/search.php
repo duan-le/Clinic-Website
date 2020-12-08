@@ -28,6 +28,6 @@
 		echo json_encode($sell_arr);
   } else {
 		echo json_encode(
-			array('message' => 'Sell Not Found')
+			array('message' => 'Sells Not Found')
 		);
 	}

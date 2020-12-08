@@ -1,145 +1,94 @@
-
 <?php
-class Department
-{
-    // DB Stuff
-    private $conn;
-    private $table = 'department';
-
-    // Properties
-    public $dnumber;
-    public $type;
-
-    // Constructor with DB
-    public function __construct($db)
+    class Department
     {
-        $this->conn = $db;
-    }
+        private $conn;
+        private $table = 'department';
 
-    // Get categories
-    public function view()
-    {
-        // Create query
-        $query = 'SELECT *
-              FROM ' . $this->table;
+        public $dnumber;
+        public $type;
 
-        // Prepare statement
-        $stmt = $this->conn->prepare($query);
-
-        // Execute query
-        $stmt->execute();
-
-        return $stmt;
-    }
-
-    // Get Single Category
-    public function search()
-    {
-        // Create query
-        $query = 'SELECT *
-            FROM ' . $this->table . '
-            WHERE dnumber = ?';
-
-        //Prepare statement
-        $stmt = $this->conn->prepare($query);
-
-        // Bind ID
-        $stmt->bindParam(1, $this->dnumber);
-
-        // Execute query
-        $stmt->execute();
-
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // set properties
-        $this->dnumber = $row['dnumber'];
-        $this->type = $row['type'];
-    }
-
-    // Create Category
-    public function insert()
-    {
-        // Create Query
-        $query = 'INSERT INTO ' . $this->table . '
-                    SET type = :type';
-
-        // Prepare Statement
-        $stmt = $this->conn->prepare($query);
-
-        // Prepare Statement
-        $stmt = $this->conn->prepare($query);
-
-        // Clean data
-        $this->type = htmlspecialchars(strip_tags($this->type));
-
-        // Bind data
-        $stmt->bindParam(':type', $this->type);
-
-        // Execute query
-        if ($stmt->execute()) {
-            return true;
+        public function __construct($db)
+        {
+            $this->conn = $db;
         }
 
-        // Print error if something goes wrong
-        printf("Error: %s.\n", $stmt->error);
-
-        return false;
-    }
-
-    // Update Category
-    public function update()
-    {
-        // Create Query
-        $query = 'UPDATE ' . $this->table . '
-            SET type = :type
-            WHERE dnumber = :dnumber';
-
-        // Prepare Statement
-        $stmt = $this->conn->prepare($query);
-
-        // Clean data
-        $this->dnumber = htmlspecialchars(strip_tags($this->dnumber));
-        $this->type = htmlspecialchars(strip_tags($this->type));
-
-        // Bind data
-        $stmt->bindParam(':dnumber', $this->dnumber);
-        $stmt->bindParam(':type', $this->type);
-
-        // Execute query
-        if ($stmt->execute()) {
-            return true;
+        public function view()
+        {
+            $query = 'SELECT *
+                FROM ' . $this->table;
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            return $stmt;
         }
 
-        // Print error if something goes wrong
-        printf("Error: %s.\n", $stmt->error);
-
-        return false;
-    }
-
-    // Delete Category
-    public function delete()
-    {
-        // Create query
-        $query = 'DELETE FROM ' . $this->table . '
-            WHERE dnumber = :dnumber';
-
-        // Prepare Statement
-        $stmt = $this->conn->prepare($query);
-
-        // clean data
-        $this->dnumber = htmlspecialchars(strip_tags($this->dnumber));
-
-        // Bind Data
-        $stmt->bindParam(':dnumber', $this->dnumber);
-
-        // Execute query
-        if ($stmt->execute()) {
-            return true;
+        public function search()
+        {
+            $query = 'SELECT *
+                FROM ' . $this->table . '
+                WHERE dnumber = ?';
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(1, $this->dnumber);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $this->dnumber = $row['dnumber'];
+            $this->type = $row['type'];
         }
 
-        // Print error if something goes wrong
-        printf("Error: %s.\n", $stmt->error);
+        public function insert()
+        {
+            $query = 'INSERT INTO ' . $this->table . '
+                        SET type = :type';
+            $stmt = $this->conn->prepare($query);
+            $stmt = $this->conn->prepare($query);
+            $this->type = htmlspecialchars(strip_tags($this->type));
+            $stmt->bindParam(':type', $this->type);
+            if ($stmt->execute()) {
+                if ($stmt->rowCount()) {
+                return true;
+                }
+                return false;
+            } else {
+                printf("Error: %s.\n", $stmt->error);
+                return false;
+            }
+        }
 
-        return false;
+        public function update()
+        {
+            $query = 'UPDATE ' . $this->table . '
+                SET type = :type
+                WHERE dnumber = :dnumber';
+            $stmt = $this->conn->prepare($query);
+            $this->dnumber = htmlspecialchars(strip_tags($this->dnumber));
+            $this->type = htmlspecialchars(strip_tags($this->type));
+            $stmt->bindParam(':dnumber', $this->dnumber);
+            $stmt->bindParam(':type', $this->type);
+            if ($stmt->execute()) {
+                if ($stmt->rowCount()) {
+                return true;
+                }
+                return false;
+            } else {
+                printf("Error: %s.\n", $stmt->error);
+                return false;
+            }
+        }
+
+        public function delete()
+        {
+            $query = 'DELETE FROM ' . $this->table . '
+                WHERE dnumber = :dnumber';
+            $stmt = $this->conn->prepare($query);
+            $this->dnumber = htmlspecialchars(strip_tags($this->dnumber));
+            $stmt->bindParam(':dnumber', $this->dnumber);
+            if ($stmt->execute()) {
+                if ($stmt->rowCount()) {
+                return true;
+                }
+                return false;
+            } else {
+                printf("Error: %s.\n", $stmt->error);
+                return false;
+            }
+        }
     }
-}

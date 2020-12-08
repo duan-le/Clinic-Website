@@ -28,6 +28,6 @@
 		echo json_encode($hp_arr);
   } else {
 		echo json_encode(
-			array('message' => 'No health report found')
+			array('message' => 'No Health Reports Found')
 		);
 	}

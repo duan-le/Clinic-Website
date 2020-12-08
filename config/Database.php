@@ -15,7 +15,7 @@
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       } catch(PDOException $e) {
         echo 'Connection Error: ' . $e->getMessage();
-	include('db_error.php');
+	      include('db_error.php');
       }
       return $this->conn;
     }

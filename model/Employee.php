@@ -2,11 +2,9 @@
 <?php
 class Employee
 {
-  // DB Stuff
   private $conn;
   private $table = 'employee';
 
-  // Properties
   public $user_id;
   public $first_name;
   public $last_name;
@@ -20,48 +18,29 @@ class Employee
   public $hours;
   public $SIN;
 
-  // Constructor with DB
   public function __construct($db)
   {
     $this->conn = $db;
   }
 
-  // Get categories
   public function view()
   {
-    // Create query
     $query = 'SELECT *
               FROM ' . $this->table;
-
-    // Prepare statement
     $stmt = $this->conn->prepare($query);
-
-    // Execute query
     $stmt->execute();
-
     return $stmt;
   }
 
-  // Get Single Category
   public function search()
   {
-    // Create query
     $query = 'SELECT *
             FROM ' . $this->table . '
             WHERE user_id = ?';
-
-    //Prepare statement
     $stmt = $this->conn->prepare($query);
-
-    // Bind ID
     $stmt->bindParam(1, $this->user_id);
-
-    // Execute query
     $stmt->execute();
-
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // set properties
     $this->user_id = $row['user_id'];
     $this->first_name = $row['first_name'];
     $this->last_name = $row['last_name'];
@@ -76,10 +55,8 @@ class Employee
     $this->SIN = $row['SIN'];
   }
 
-  // Create Category
   public function insert()
   {
-    // Create Query
     $query = 'INSERT INTO ' . $this->table . '
             SET first_name = :first_name,
                 last_name = :last_name,
@@ -92,11 +69,7 @@ class Employee
                 wage = :wage,
                 hours = :hours,
                 SIN = :SIN';
-
-    // Prepare Statement
     $stmt = $this->conn->prepare($query);
-
-    // Clean data
     $this->first_name = htmlspecialchars(strip_tags($this->first_name));
     $this->last_name = htmlspecialchars(strip_tags($this->last_name));
     $this->password = htmlspecialchars(strip_tags($this->password));
@@ -108,8 +81,6 @@ class Employee
     $this->wage = htmlspecialchars(strip_tags($this->wage));
     $this->hours = htmlspecialchars(strip_tags($this->hours));
     $this->SIN = htmlspecialchars(strip_tags($this->SIN));
-
-    // Bind data
     $stmt->bindParam(':first_name', $this->first_name);
     $stmt->bindParam(':last_name', $this->last_name);
     $stmt->bindParam(':password', $this->password);
@@ -121,22 +92,19 @@ class Employee
     $stmt->bindParam(':wage', $this->wage);
     $stmt->bindParam(':hours', $this->hours);
     $stmt->bindParam(':SIN', $this->SIN);
-
-    // Execute query
     if ($stmt->execute()) {
-      return true;
+      if ($stmt->rowCount()) {
+        return true;
+      }
+      return false;
+    } else {
+        printf("Error: %s.\n", $stmt->error);
+        return false;
     }
-
-    // Print error if something goes wrong
-    printf("Error: %s.\n", $stmt->error);
-
-    return false;
   }
 
-  // Update Category
   public function update()
   {
-    // Create Query
     $query = 'UPDATE ' . $this->table . '
             SET first_name = :first_name,
                 last_name = :last_name,
@@ -150,11 +118,7 @@ class Employee
                 hours = :hours,
                 SIN = :SIN
             WHERE user_id = :user_id';
-
-    // Prepare Statement
     $stmt = $this->conn->prepare($query);
-
-    // Clean data
     $this->user_id = htmlspecialchars(strip_tags($this->user_id));
     $this->first_name = htmlspecialchars(strip_tags($this->first_name));
     $this->last_name = htmlspecialchars(strip_tags($this->last_name));
@@ -167,8 +131,6 @@ class Employee
     $this->wage = htmlspecialchars(strip_tags($this->wage));
     $this->hours = htmlspecialchars(strip_tags($this->hours));
     $this->SIN = htmlspecialchars(strip_tags($this->SIN));
-
-    // Bind data
     $stmt->bindParam(':user_id', $this->user_id);
     $stmt->bindParam(':first_name', $this->first_name);
     $stmt->bindParam(':last_name', $this->last_name);
@@ -181,42 +143,32 @@ class Employee
     $stmt->bindParam(':wage', $this->wage);
     $stmt->bindParam(':hours', $this->hours);
     $stmt->bindParam(':SIN', $this->SIN);
-
-    // Execute query
     if ($stmt->execute()) {
-      return true;
+      if ($stmt->rowCount()) {
+        return true;
+      }
+      return false;
+    } else {
+        printf("Error: %s.\n", $stmt->error);
+        return false;
     }
-
-    // Print error if something goes wrong
-    printf("Error: %s.\n", $stmt->error);
-
-    return false;
   }
 
-  // Delete Category
   public function delete()
   {
-    // Create query
     $query = 'DELETE FROM ' . $this->table . '
             WHERE user_id = :user_id';
-
-    // Prepare Statement
     $stmt = $this->conn->prepare($query);
-
-    // clean data
     $this->user_id = htmlspecialchars(strip_tags($this->user_id));
-
-    // Bind Data
     $stmt->bindParam(':user_id', $this->user_id);
-
-    // Execute query
     if ($stmt->execute()) {
-      return true;
+      if ($stmt->rowCount()) {
+        return true;
+      }
+      return false;
+    } else {
+        printf("Error: %s.\n", $stmt->error);
+        return false;
     }
-
-    // Print error if something goes wrong
-    printf("Error: %s.\n", $stmt->error);
-
-    return false;
   }
 }

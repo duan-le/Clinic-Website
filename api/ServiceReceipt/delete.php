@@ -17,10 +17,10 @@
 
   if ($service_receipt->insert()) {
     echo json_encode(
-      array('message' => 'Service Receipt Created')
+      array('message' => 'Service Receipt Deleted')
     );
   } else {
     echo json_encode(
-      array('message' => 'Service Receipt Not Created')
+      array('message' => 'Service Receipt Not Deleted')
     );
   }

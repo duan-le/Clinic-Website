@@ -17,10 +17,10 @@
 
   if ($hp->delete()) {
     echo json_encode(
-      array('message' => 'healthreport deleted')
+      array('message' => 'Health Report Deleted')
     );
   } else {
     echo json_encode(
-      array('message' => 'health report Not Deleted')
+      array('message' => 'Health Report Not Deleted')
     );
   }

@@ -3,7 +3,7 @@
   header('Content-Type: application/json');
 
   include_once '../../config/Database.php';
-  include_once '../../model/appointment.php';
+  include_once '../../model/Appointment.php';
 
   $database = new Database();
   $db = $database->connect();
@@ -27,7 +27,7 @@
         'time' => $time,
         'client_id' => $client_id,
         'employee_id' => $employee_id,
-        'service_name' = $service_name
+        'service_name' => $service_name
 
 			);
 			array_push($appoint_arr['data'], $appoint_item);
@@ -35,6 +35,6 @@
 		echo json_encode($appoint_arr);
   } else {
 		echo json_encode(
-			array('message' => 'No Appointments Found')
+			array('message' => 'No Appointment Found')
 		);
 	}

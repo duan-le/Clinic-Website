@@ -12,15 +12,15 @@
 	$calendar = new Calendar($db);
   $data = json_decode(file_get_contents("php://input"));
   
-  $calendar->product_id = $data->product_id;
-  $calendar->receipt_number = $data->receipt_number;
+  $calendar->month = $data->month;
+  $calendar->year = $data->year;
 
   if ($calendar->delete()) {
     echo json_encode(
-      array('message' => 'Calendar Created')
+      array('message' => 'Calendar Deleted')
     );
   } else {
     echo json_encode(
-      array('message' => 'Calendar Not Created')
+      array('message' => 'Calendar Not Deleted')
     );
   }
