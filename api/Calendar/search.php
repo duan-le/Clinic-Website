@@ -9,7 +9,6 @@
   $db = $database->connect();
 	$calendar = new Calendar($db);
 
-	$calendar->month = isset($_GET['month']) ? $_GET['month'] : die();
 	$calendar->year = isset($_GET['year']) ? $_GET['year'] : die();
 	$result = $calendar->search();
   $num = $result->rowCount();

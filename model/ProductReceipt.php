@@ -18,9 +18,9 @@
 		}
 
 		public function search() {
-			$query = 'SELECT * FROM ' . $this->table . ' WHERE product_id = ?';
+			$query = 'SELECT * FROM ' . $this->table . ' WHERE receipt_number = ?';
 			$stmt = $this->conn->prepare($query);
-			$stmt->bindParam(1, $this->product_id);
+			$stmt->bindParam(1, $this->receipt_number);
 			$stmt->execute();
 			return $stmt;
 		}

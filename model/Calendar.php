@@ -18,10 +18,9 @@
 		}
 
 		public function search() {
-			$query = 'SELECT * FROM ' . $this->table . ' WHERE month = ? AND year = ?';
+			$query = 'SELECT * FROM ' . $this->table . ' WHERE year = ?';
 			$stmt = $this->conn->prepare($query);
-			$stmt->bindParam(1, $this->month);
-			$stmt->bindParam(2, $this->year);
+			$stmt->bindParam(1, $this->year);
 			$stmt->execute();
 			return $stmt;
 		}
