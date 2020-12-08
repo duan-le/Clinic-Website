@@ -10,11 +10,24 @@
 
   $receipt = new Receipt($db);
   $receipt->number = isset($_GET['number']) ? $_GET['number'] : die();
-  $receipt->search();
+	$result = $receipt->search();
+  $num = $result->rowCount();
 
-  $receipt_arr = array(
-    'name' => $receipt->number,
-    'date' => $receipt->date,
-  );
+  if ($num > 0) {
+		$r_arr = array();
+		$r_arr['data'] = array();
 
-  print_r(json_encode($receipt_arr));
+		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+			extract($row);
+			$r_item = array(
+				'number' => $number,
+				'date' => $date
+			);
+			array_push($r_arr['data'], $r_item);
+		}
+		echo json_encode($r_arr);
+  } else {
+		echo json_encode(
+			array('message' => 'No Receipts Found')
+		);
+	}

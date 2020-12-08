@@ -10,11 +10,27 @@
 
   $department = new Department($db);
   $department->dnumber = isset($_GET['dnumber']) ? $_GET['dnumber'] : die();
-  $department->search();
+  $result = $department->search();
+  $num = $result->rowCount();
 
-  $department_arr = array(
-    'dnumber' => $department->dnumber,
-    'type' => $department->type,
-  );
+  if($num > 0) {
+    $department_arr = array();
+    $department_arr['data'] = array();
 
-  print_r(json_encode($department_arr));
+    while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+      extract($row);
+
+      $department_item = array(
+        'dnumber' => $dnumber,
+        'type' => $type
+      );
+
+      array_push($department_arr['data'], $department_item);
+    }
+
+    echo json_encode($department_arr);
+  } else {
+    echo json_encode(
+      array('message' => 'No Department Found')
+    );
+  }

@@ -22,9 +22,7 @@
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(1, $this->number);
             $stmt->execute();
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $this->number = $row['number'];
-            $this->date = $row['date'];
+            return $stmt;
         }
 
         public function insert()
@@ -37,15 +35,16 @@
             $this->date = htmlspecialchars(strip_tags($this->date));
             $stmt->bindParam(1, $this->number);
             $stmt->bindParam(2, $this->date);
-            if ($stmt->execute()) {
-                if ($stmt->rowCount()) {
-                    return true;
-                }
-                return false;
-            } else {
-                printf("Error: %s.\n", $stmt->error);
-                return false;
-            }
+            try {
+				$stmt->execute();
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
+				return false;
+			}
         }
 
         public function update()
@@ -58,15 +57,16 @@
             $this->date = htmlspecialchars(strip_tags($this->date));
             $stmt->bindParam(1, $this->date);
             $stmt->bindParam(2, $this->number);
-            if ($stmt->execute()) {
-                if ($stmt->rowCount()) {
-                    return true;
-                }
-                return false;
-            } else {
-                printf("Error: %s.\n", $stmt->error);
-                return false;
-            }
+            try {
+				$stmt->execute();
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
+				return false;
+			}
         }
 
         public function delete()
@@ -76,14 +76,15 @@
             $stmt = $this->conn->prepare($query);
             $this->number = htmlspecialchars(strip_tags($this->number));
             $stmt->bindParam(1, $this->number);
-            if ($stmt->execute()) {
-                if ($stmt->rowCount()) {
-                    return true;
-                }
-                return false;
-            } else {
-                printf("Error: %s.\n", $stmt->error);
-                return false;
-            }
+            try {
+				$stmt->execute();
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
+				return false;
+			}
         }
     }

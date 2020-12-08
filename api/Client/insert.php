@@ -13,6 +13,7 @@
   $client = new Client($db);
   $data = json_decode(file_get_contents("php://input"));
 
+  $client->user_id = $data->user_id;
   $client->first_name = $data->first_name;
   $client->last_name = $data->last_name;
   $client->password = $data->password;

@@ -32,13 +32,14 @@
 			$this->product_id = htmlspecialchars(strip_tags($this->product_id));
 			$stmt->bindParam(1, $this->dnumber);
 			$stmt->bindParam(2, $this->product_id);
-			if ($stmt->execute()) {
+			try {
+				$stmt->execute();
 				if ($stmt->rowCount()) {
 					return true;
 				}
 				return false;
-			} else {
-				printf("Error: %s.\n", $stmt->error);
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
 				return false;
 			}
 		}
@@ -50,13 +51,14 @@
 			$this->product_id = htmlspecialchars(strip_tags($this->product_id));
 			$stmt->bindParam(1, $this->dnumber);
 			$stmt->bindParam(2, $this->product_id);
-			if ($stmt->execute()) {
+			try {
+				$stmt->execute();
 				if ($stmt->rowCount()) {
 					return true;
 				}
 				return false;
-			} else {
-				printf("Error: %s.\n", $stmt->error);
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
 				return false;
 			}
 		}

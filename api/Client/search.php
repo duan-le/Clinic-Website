@@ -10,17 +10,30 @@
 
   $client = new Client($db);
   $client->user_id = isset($_GET['user_id']) ? $_GET['user_id'] : die();
-  $client->search();
+  $result = $client->search();
+  $num = $result->rowCount();
 
-  $client_arr = array(
-    'user_id' => $client->user_id,
-    'first_name' => $client->first_name,
-    'last_name' => $client->last_name,
-    'password' => $client->password,
-    'birthdate' => $client->birthdate,
-    'address' => $client->address,
-    'phone_number' => $client->phone_number,
-    'sex' => $client->sex,
-  );
-  
-  print_r(json_encode($client_arr));
+  if($num > 0) {
+    $client_arr = array();
+    $client_arr['data'] = array();
+
+    while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+      extract($row);
+      $client_item = array(
+        'user_id' => $user_id,
+        'first_name' => $first_name,
+        'last_name' => $last_name,
+        'password' => $password,
+        'birthdate' => $birthdate,
+        'address' => $address,
+        'phone_number' => $phone_number,
+        'sex' => $sex,
+      );
+      array_push($client_arr['data'], $client_item);
+    }
+    echo json_encode($client_arr);
+  } else {
+    echo json_encode(
+      array('message' => 'No Client Found')
+    );
+  }

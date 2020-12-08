@@ -49,14 +49,15 @@
       $stmt->bindParam(5, $this->time);
       $stmt->bindParam(6, $this->client_id);
       $stmt->bindParam(7, $this->employee_id);
-      $stmt->bindParam(8, $this->service_name);
-			if ($stmt->execute()) {
+			$stmt->bindParam(8, $this->service_name);
+			try {
+				$stmt->execute();
 				if ($stmt->rowCount()) {
 					return true;
 				}
 				return false;
-			} else {
-				printf("Error: %s.\n", $stmt->error);
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
 				return false;
 			}
 		}
@@ -79,14 +80,15 @@
       $stmt->bindParam(4, $this->time);
       $stmt->bindParam(5, $this->client_id);
       $stmt->bindParam(6, $this->employee_id);
-      $stmt->bindParam(7, $this->service_name);
-			if ($stmt->execute()) {
+			$stmt->bindParam(7, $this->service_name);
+			try {
+				$stmt->execute();
 				if ($stmt->rowCount()) {
 					return true;
 				}
 				return false;
-			} else {
-				printf("Error: %s.\n", $stmt->error);
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
 				return false;
 			}
 		}

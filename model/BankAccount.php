@@ -35,13 +35,14 @@
 			$stmt->bindParam(1, $this->account_number);
 			$stmt->bindParam(2, $this->account_type);
 			$stmt->bindParam(3, $this->employee_id);
-			if ($stmt->execute()) {
+			try {
+				$stmt->execute();
 				if ($stmt->rowCount()) {
 					return true;
 				}
 				return false;
-			} else {
-				printf("Error: %s.\n", $stmt->error);
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
 				return false;
 			}
 		}
@@ -55,13 +56,14 @@
 			$stmt->bindParam(1, $this->account_number);
 			$stmt->bindParam(2, $this->account_type);
 			$stmt->bindParam(3, $this->employee_id);
-			if ($stmt->execute()) {
+			try {
+				$stmt->execute();
 				if ($stmt->rowCount()) {
 					return true;
 				}
 				return false;
-			} else {
-				printf("Error: %s.\n", $stmt->error);
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
 				return false;
 			}
 		}
@@ -71,13 +73,14 @@
 			$stmt = $this->conn->prepare($query);
 			$this->employee_id = htmlspecialchars(strip_tags($this->employee_id));
 			$stmt->bindParam(1, $this->employee_id);
-			if ($stmt->execute()) {
+			try {
+				$stmt->execute();
 				if ($stmt->rowCount()) {
 					return true;
 				}
 				return false;
-			} else {
-				printf("Error: %s.\n", $stmt->error);
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
 				return false;
 			}
 		}

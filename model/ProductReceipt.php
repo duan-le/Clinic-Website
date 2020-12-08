@@ -18,10 +18,9 @@
 		}
 
 		public function search() {
-			$query = 'SELECT * FROM ' . $this->table . ' WHERE product_id = ? AND receipt_number = ?';
+			$query = 'SELECT * FROM ' . $this->table . ' WHERE product_id = ?';
 			$stmt = $this->conn->prepare($query);
 			$stmt->bindParam(1, $this->product_id);
-			$stmt->bindParam(2, $this->receipt_number);
 			$stmt->execute();
 			return $stmt;
 		}
@@ -33,13 +32,14 @@
 			$this->receipt_number = htmlspecialchars(strip_tags($this->receipt_number));
 			$stmt->bindParam(1, $this->product_id);
 			$stmt->bindParam(2, $this->receipt_number);
-			if ($stmt->execute()) {
+			try {
+				$stmt->execute();
 				if ($stmt->rowCount()) {
 					return true;
 				}
 				return false;
-			} else {
-				printf("Error: %s.\n", $stmt->error);
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
 				return false;
 			}
 		}
@@ -51,13 +51,14 @@
 			$this->receipt_number = htmlspecialchars(strip_tags($this->receipt_number));
 			$stmt->bindParam(1, $this->product_id);
 			$stmt->bindParam(2, $this->receipt_number);
-			if ($stmt->execute()) {
+			try {
+				$stmt->execute();
 				if ($stmt->rowCount()) {
 					return true;
 				}
 				return false;
-			} else {
-				printf("Error: %s.\n", $stmt->error);
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
 				return false;
 			}
 		}

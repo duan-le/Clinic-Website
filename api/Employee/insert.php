@@ -13,6 +13,7 @@
   $employee = new Employee($db);
   $data = json_decode(file_get_contents("php://input"));
 
+  $employee->user_id = $data->user_id;
   $employee->first_name = $data->first_name;
   $employee->last_name = $data->last_name;
   $employee->password = $data->password;

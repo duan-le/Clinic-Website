@@ -10,11 +10,24 @@
 
   $service = new Service($db);
   $service->name = isset($_GET['name']) ? $_GET['name'] : die();
-  $service->search();
+  $result = $service->search();
+  $num = $result->rowCount();
 
-  $service_arr = array(
-    'name' => $service->name,
-    'price' => $service->price,
-  );
+  if($num > 0) {
+    $service_arr = array();
+    $service_arr['data'] = array();
+    while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+      extract($row);
+      $service_item = array(
+        'name' => $name,
+        'price' => $price
+      );
+      array_push($service_arr['data'], $service_item);
+    }
+    echo json_encode($service_arr);
 
-  print_r(json_encode($service_arr));
+  } else {
+    echo json_encode(
+      array('message' => 'No Services Found')
+    );
+  }

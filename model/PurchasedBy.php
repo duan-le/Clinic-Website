@@ -28,9 +28,7 @@
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(1, $this->product_id);
             $stmt->execute();
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $this->product_id = $row['product_id'];
-            $this->user_id = $row['user_id'];
+            return $stmt;
         }
 
         public function insert()
@@ -43,15 +41,16 @@
             $this->user_id = htmlspecialchars(strip_tags($this->user_id));
             $stmt->bindParam(1, $this->product_id);
             $stmt->bindParam(2, $this->user_id);
-            if ($stmt->execute()) {
-                if ($stmt->rowCount()) {
-                    return true;
-                }
-                return false;
-            } else {
-                printf("Error: %s.\n", $stmt->error);
-                return false;
-            }
+            try {
+				$stmt->execute();
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
+				return false;
+			}
         }
 
         public function delete()
@@ -63,14 +62,15 @@
             $this->user = htmlspecialchars(strip_tags($this->user_id));
             $stmt->bindParam(1, $this->product_id);
             $stmt->bindParam(2, $this->user_id);
-            if ($stmt->execute()) {
-                if ($stmt->rowCount()) {
-                    return true;
-                }
-                return false;
-            } else {
-                printf("Error: %s.\n", $stmt->error);
-                return false;
-            }
+            try {
+				$stmt->execute();
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
+				return false;
+			}
         }
     }

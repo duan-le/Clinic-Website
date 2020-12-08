@@ -10,12 +10,28 @@
 
   $product = new Product($db);
   $product->product_id = isset($_GET['product_id']) ? $_GET['product_id'] : die();
-  $product->search();
+  $result = $product->search();
+  $num = $result->rowCount();
 
-  $product_arr = array(
-    'product_id' => $product->product_id,
-    'name' => $product->name,
-    'price' => $product->price,
-  );
+  if($num > 0) {
+    $product_arr = array();
+    $product_arr['data'] = array();
 
-  print_r(json_encode($product_arr));
+    while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+      extract($row);
+
+      $product_item = array(
+        'product_id' => $product_id,
+        'name' => $name,
+        'price' => $price
+      );
+
+      array_push($product_arr['data'], $product_item);
+    }
+    echo json_encode($product_arr);
+
+  } else {
+    echo json_encode(
+      array('message' => 'No Products Found')
+    );
+  }

@@ -18,8 +18,8 @@
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
       extract($row);
       $pb_item = array(
-        'product_id' => product_id,
-        'user_id' => user_id
+        'product_id' => $product_id,
+        'user_id' => $user_id
       );
       array_push($pb_arr['data'], $pb_item);
     }

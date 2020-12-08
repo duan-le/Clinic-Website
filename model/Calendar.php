@@ -33,13 +33,14 @@
 			$this->year = htmlspecialchars(strip_tags($this->year));
 			$stmt->bindParam(1, $this->month);
 			$stmt->bindParam(2, $this->year);
-			if ($stmt->execute()) {
+			try {
+				$stmt->execute();
 				if ($stmt->rowCount()) {
 					return true;
 				}
 				return false;
-			} else {
-				printf("Error: %s.\n", $stmt->error);
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
 				return false;
 			}
 		}
@@ -51,13 +52,14 @@
 			$this->year = htmlspecialchars(strip_tags($this->year));
 			$stmt->bindParam(1, $this->month);
 			$stmt->bindParam(2, $this->year);
-			if ($stmt->execute()) {
+			try {
+				$stmt->execute();
 				if ($stmt->rowCount()) {
 					return true;
 				}
 				return false;
-			} else {
-				printf("Error: %s.\n", $stmt->error);
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
 				return false;
 			}
 		}

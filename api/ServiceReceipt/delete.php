@@ -15,7 +15,7 @@
   $service_receipt->service_name = $data->service_name;
   $service_receipt->receipt_number = $data->receipt_number;
 
-  if ($service_receipt->insert()) {
+  if ($service_receipt->delete()) {
     echo json_encode(
       array('message' => 'Service Receipt Deleted')
     );

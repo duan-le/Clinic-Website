@@ -30,32 +30,33 @@
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(1, $this->product_id);
             $stmt->execute();
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $this->product_id = $row['product_id'];
-            $this->name = $row['name'];
-            $this->price = $row['price'];
+            return $stmt;
         }
 
         public function insert()
         {
             $query = 'INSERT INTO ' . $this->table . '
-                        SET name = :name,
+                        SET product_id = :product_id,
+                            name = :name,
                             price = :price';
             $stmt = $this->conn->prepare($query);
             $stmt = $this->conn->prepare($query);
+            $this->product_id = htmlspecialchars(strip_tags($this->product_id));
             $this->name = htmlspecialchars(strip_tags($this->name));
             $this->price = htmlspecialchars(strip_tags($this->price));
+            $stmt->bindParam(':product_id', $this->product_id);
             $stmt->bindParam(':name', $this->name);
             $stmt->bindParam(':price', $this->price);
-            if ($stmt->execute()) {
-                if ($stmt->rowCount()) {
-                    return true;
-                }
-                return false;
-            } else {
-                printf("Error: %s.\n", $stmt->error);
-                return false;
-            }
+            try {
+				$stmt->execute();
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
+				return false;
+			}
         }
 
         public function update()
@@ -71,15 +72,16 @@
             $stmt->bindParam(':product_id', $this->product_id);
             $stmt->bindParam(':name', $this->name);
             $stmt->bindParam(':price', $this->price);
-            if ($stmt->execute()) {
-                if ($stmt->rowCount()) {
-                    return true;
-                }
-                return false;
-            } else {
-                printf("Error: %s.\n", $stmt->error);
-                return false;
-            }
+            try {
+				$stmt->execute();
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
+				return false;
+			}
         }
 
         public function delete()
@@ -89,14 +91,15 @@
             $stmt = $this->conn->prepare($query);
             $this->product_id = htmlspecialchars(strip_tags($this->product_id));
             $stmt->bindParam(':product_id', $this->product_id);
-            if ($stmt->execute()) {
-                if ($stmt->rowCount()) {
-                    return true;
-                }
-                return false;
-            } else {
-                printf("Error: %s.\n", $stmt->error);
-                return false;
-            }
+            try {
+				$stmt->execute();
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
+				return false;
+			}
         }
     }

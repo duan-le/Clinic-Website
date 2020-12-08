@@ -29,28 +29,28 @@
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(1, $this->dnumber);
             $stmt->execute();
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $this->dnumber = $row['dnumber'];
-            $this->type = $row['type'];
+            return $stmt;
         }
 
         public function insert()
         {
             $query = 'INSERT INTO ' . $this->table . '
-                        SET type = :type';
+                        SET dnumber = :dnumber, type = :type';
             $stmt = $this->conn->prepare($query);
-            $stmt = $this->conn->prepare($query);
+            $this->dnumber = htmlspecialchars(strip_tags($this->dnumber));
             $this->type = htmlspecialchars(strip_tags($this->type));
+            $stmt->bindParam(':dnumber', $this->dnumber);
             $stmt->bindParam(':type', $this->type);
-            if ($stmt->execute()) {
-                if ($stmt->rowCount()) {
-                return true;
-                }
-                return false;
-            } else {
-                printf("Error: %s.\n", $stmt->error);
-                return false;
-            }
+            try {
+				$stmt->execute();
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
+				return false;
+			}
         }
 
         public function update()
@@ -63,15 +63,16 @@
             $this->type = htmlspecialchars(strip_tags($this->type));
             $stmt->bindParam(':dnumber', $this->dnumber);
             $stmt->bindParam(':type', $this->type);
-            if ($stmt->execute()) {
-                if ($stmt->rowCount()) {
-                return true;
-                }
-                return false;
-            } else {
-                printf("Error: %s.\n", $stmt->error);
-                return false;
-            }
+            try {
+				$stmt->execute();
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
+				return false;
+			}
         }
 
         public function delete()
@@ -81,14 +82,15 @@
             $stmt = $this->conn->prepare($query);
             $this->dnumber = htmlspecialchars(strip_tags($this->dnumber));
             $stmt->bindParam(':dnumber', $this->dnumber);
-            if ($stmt->execute()) {
-                if ($stmt->rowCount()) {
-                return true;
-                }
-                return false;
-            } else {
-                printf("Error: %s.\n", $stmt->error);
-                return false;
-            }
+            try {
+				$stmt->execute();
+				if ($stmt->rowCount()) {
+					return true;
+				}
+				return false;
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
+				return false;
+			}
         }
     }

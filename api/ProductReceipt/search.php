@@ -10,7 +10,6 @@
 	$product_receipt = new ProductReceipt($db);
 	
 	$product_receipt->product_id = isset($_GET['product_id']) ? $_GET['product_id'] : die();
-	$product_receipt->receipt_number = isset($_GET['receipt_number']) ? $_GET['receipt_number'] : die();
 	$result = $product_receipt->search();
   $num = $result->rowCount();
 

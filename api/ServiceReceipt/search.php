@@ -9,7 +9,6 @@
   $db = $database->connect();
 	$service_receipt = new ServiceReceipt($db);
 	
-	$product_receipt->service_name = isset($_GET['service_name']) ? $_GET['service_name'] : die();
 	$product_receipt->receipt_number = isset($_GET['receipt_number']) ? $_GET['receipt_number'] : die();
 	$result = $service_receipt->search();
   $num = $result->rowCount();

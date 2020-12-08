@@ -15,12 +15,12 @@
   $product_receipt->product_id = $data->product_id;
   $product_receipt->receipt_number = $data->receipt_number;
 
-  if ($calendar->delete()) {
+  if ($product_receipt->delete()) {
     echo json_encode(
-      array('message' => 'Calendar Deleted')
+      array('message' => 'Product Receipt Deleted')
     );
   } else {
     echo json_encode(
-      array('message' => 'Calendar Not Deleted')
+      array('message' => 'Product Receipt Not Deleted')
     );
   }

@@ -10,11 +10,23 @@
 
   $pb = new PurchasedBy($db);
   $pb->product_id = isset($_GET['product_id']) ? $_GET['product_id'] : die();
-  $pb->search();
+  $result = $pb->search();
+  $num = $result->rowCount();
 
-  $pb_arr = array(
-    'product_id' => $pb->product_id,
-    'user_id' => $pb->user_id
-  );
-
-  print_r(json_encode($pb_arr));
+  if($num > 0) {
+    $pb_arr = array();
+    $pb_arr['data'] = array();
+    while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+      extract($row);
+      $pb_item = array(
+        'product_id' => $product_id,
+        'user_id' => $user_id
+      );
+      array_push($pb_arr['data'], $pb_item);
+    }
+    echo json_encode($pb_arr);
+  } else {
+    echo json_encode(
+      array('message' => 'No Purchased By Found')
+    );
+  }

@@ -32,14 +32,15 @@
 			$this->date = htmlspecialchars(strip_tags($this->date));
 			$stmt->bindParam(1, $this->client_id);
 			$stmt->bindParam(2, $this->date);
-			if ($stmt->execute()) {
+			try {
+				$stmt->execute();
 				if ($stmt->rowCount()) {
 					return true;
 				}
 				return false;
-			} else {
-					printf("Error: %s.\n", $stmt->error);
-					return false;
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
+				return false;
 			}
 		}
 
@@ -50,14 +51,15 @@
 			$this->date = htmlspecialchars(strip_tags($this->date));
 			$stmt->bindParam(1, $this->client_id);
 			$stmt->bindParam(2, $this->date);
-			if ($stmt->execute()) {
+			try {
+				$stmt->execute();
 				if ($stmt->rowCount()) {
 					return true;
 				}
 				return false;
-			} else {
-					printf("Error: %s.\n", $stmt->error);
-					return false;
+			} catch (PDOException $e) {
+				echo ($e->getMessage());
+				return false;
 			}
 		}
 	}

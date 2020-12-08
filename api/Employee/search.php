@@ -10,21 +10,35 @@
 
   $employee = new Employee($db);
   $employee->user_id = isset($_GET['user_id']) ? $_GET['user_id'] : die();
-  $employee->search();
+  $result = $employee->search();
+  $num = $result->rowCount();
 
-  $employee_arr = array(
-    'user_id' => $employee->user_id,
-    'first_name' => $employee->first_name,
-    'last_name' => $employee->last_name,
-    'password' => $employee->password,
-    'birthdate' => $employee->birthdate,
-    'address' => $employee->address,
-    'phone_number' => $employee->phone_number,
-    'sex' => $employee->sex,
-    'start_date' => $employee->start_date,
-    'wage' => $employee->wage,
-    'hours' => $employee->hours,
-    'SIN' => $employee->SIN,
-  );
+  if($num > 0) {
+    $employee_arr = array();
+    $employee_arr['data'] = array();
 
-  print_r(json_encode($employee_arr));
+    while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+      extract($row);
+      $employee_item = array(
+        'user_id' => $user_id,
+        'first_name' => $first_name,
+        'last_name' => $last_name,
+        'password' => $password,
+        'birthdate' => $birthdate,
+        'address' => $address,
+        'phone_number' => $phone_number,
+        'sex' => $sex,
+        'start_date' => $start_date,
+        'wage' => $wage,
+        'hours' => $hours,
+        'SIN' => $SIN
+      );
+      array_push($employee_arr['data'], $employee_item);
+    }
+    echo json_encode($employee_arr);
+
+  } else {
+    echo json_encode(
+      array('message' => 'No Employees Found')
+    );
+  }
