@@ -307,7 +307,7 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/vnd.api+json",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
@@ -455,7 +455,7 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/vnd.api+json",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
@@ -517,6 +517,37 @@
 								"api",
 								"Calendar",
 								"delete.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"month\": \"01\",\r\n    \"year\": \"2020\",\r\n    \"newMonth\": \"01\",\r\n    \"newYear\": \"2022\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/massageClinic/api/Calendar/update.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"massageClinic",
+								"api",
+								"Calendar",
+								"update.php"
 							]
 						}
 					},
@@ -1186,6 +1217,37 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"client_id\": \"1\",\r\n    \"date\": \"01/01/2020\",\r\n    \"newClient_id\": \"1\",\r\n    \"newDate\": \"12/12/2022\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/massageclinic/api/healthreport/update.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"massageclinic",
+								"api",
+								"healthreport",
+								"update.php"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -1449,7 +1511,7 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/vnd.api+json",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
@@ -1511,6 +1573,37 @@
 								"api",
 								"ProductReceipt",
 								"delete.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_id\": \"1\",\r\n    \"receipt_number\": \"2\",\r\n    \"new_product_id\": \"2\",\r\n    \"new_receipt_number\": \"2\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/massageClinic/api/ProductReceipt/update.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"massageClinic",
+								"api",
+								"ProductReceipt",
+								"update.php"
 							]
 						}
 					},
@@ -1654,6 +1747,37 @@
 								"api",
 								"purchasedby",
 								"delete.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_id\": \"1\",\r\n    \"user_id\": \"2\",\r\n    \"new_product_id\": \"2\",\r\n    \"new_user_id\": \"1\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/massageclinic/api/purchasedby/update.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"massageclinic",
+								"api",
+								"purchasedby",
+								"update.php"
 							]
 						}
 					},
@@ -1948,6 +2072,37 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dnumber\": \"3\",\r\n    \"product_id\": \"6\",\r\n    \"new_dnumber\": \"1\",\r\n    \"new_product_id\": \"6\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/massageclinic/api/sells/update.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"massageclinic",
+								"api",
+								"sells",
+								"update.php"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -2211,7 +2366,7 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/vnd.api+json",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
@@ -2273,6 +2428,37 @@
 								"api",
 								"ServiceReceipt",
 								"delete.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service_name\": \"Reflexology\",\r\n    \"receipt_number\": \"1\",\r\n    \"new_service_name\": \"Accupuncture\",\r\n    \"new_receipt_number\": \"1\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/massageClinic/api/ServiceReceipt/update.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"massageClinic",
+								"api",
+								"ServiceReceipt",
+								"update.php"
 							]
 						}
 					},
