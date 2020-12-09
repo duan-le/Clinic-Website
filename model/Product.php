@@ -31,6 +31,10 @@
 
         public function insert()
         {
+          if (
+            $this->name == null ||
+            $this->price == null
+          ) return false;
             $this->strip();
             $query = "CALL product_insert('$this->name','$this->price')";
             $stmt = $this->conn->prepare($query);
@@ -48,6 +52,11 @@
 
         public function update()
         {
+          if (
+            $this->product_id == null ||
+            $this->name == null ||
+            $this->price == null
+          ) return false;
           $this->strip();
           $query = "CALL product_update('$this->name','$this->price','$this->product_id')";
           $stmt = $this->conn->prepare($query);

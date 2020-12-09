@@ -25,6 +25,10 @@
 		}
 
 		public function insert() {
+			if (
+				$this->dnumber == null ||
+				$this->product_id == null
+			) return false;
 			$this->strip();
 			$query = "CALL sells_insert('$this->dnumber','$this->product_id')";
 			$stmt = $this->conn->prepare($query);

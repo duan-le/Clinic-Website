@@ -26,6 +26,9 @@
 
         public function insert()
         {
+            if (
+				$this->date == null
+			) return false;
             $this->strip();
             $query = "CALL receipt_insert('$this->date')";
             $stmt = $this->conn->prepare($query);
@@ -43,6 +46,10 @@
 
         public function update()
         {
+            if (
+                $this->date == null ||
+                $this->number == null
+			) return false;
             $this->strip();
             $query = "CALL receipt_update('$this->date','$this->number')";
             $stmt = $this->conn->prepare($query);

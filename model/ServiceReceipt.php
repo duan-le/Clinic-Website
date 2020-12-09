@@ -25,6 +25,10 @@
 		}
 
 		public function insert() {
+			if (
+				$this->service_name == null ||
+				$this->receipt_number == null
+			) return false;
 			$this->strip();
 			$query = "CALL servicereceipt_insert('$this->service_name','$this->receipt_number')";
 			$stmt = $this->conn->prepare($query);

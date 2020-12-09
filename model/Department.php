@@ -25,7 +25,10 @@
             return $stmt;
         }
 
-      public function insert(){
+      public function insert() {
+        if (
+          $this->type == null
+        ) return false;
             $this->strip();
             $query = "CALL department_insert('$this->type')";
             $stmt = $this->conn->prepare($query);
@@ -43,6 +46,10 @@
         }
 
       public function update(){
+        if (
+          $this->dnumber == null ||
+          $this->type == null
+        ) return false;
         $this->strip();
         $query = "CALL department_update('$this->type','$this->dnumber')";
         $stmt = $this->conn->prepare($query);

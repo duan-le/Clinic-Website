@@ -41,6 +41,19 @@ class Employee
 
   public function insert()
   {
+    if (
+      $this->first_name == null ||
+      $this->last_name == null ||
+      $this->password == null ||
+      $this->birthdate == null ||
+      $this->address == null ||
+      $this->phone_number == null ||
+      $this->sex == null ||
+      $this->start_date == null ||
+      $this->wage == null ||
+      $this->hours == null ||
+      $this->SIN == null
+    ) return false;
     $this->strip();
     $query = "CALL employee_insert('$this->first_name','$this->last_name','$this->password','$this->birthdate','$this->address','$this->phone_number',
     '$this->sex','$this->start_date','$this->wage','$this->hours','$this->SIN')";
@@ -60,6 +73,20 @@ class Employee
 
   public function update()
   {
+    if (
+      $this->user_id == null ||
+      $this->first_name == null ||
+      $this->last_name == null ||
+      $this->password == null ||
+      $this->birthdate == null ||
+      $this->address == null ||
+      $this->phone_number == null ||
+      $this->sex == null ||
+      $this->start_date == null ||
+      $this->wage == null ||
+      $this->hours == null ||
+      $this->SIN == null
+    ) return false;
     $this->strip();
     $query = "CALL employee_update('$this->first_name','$this->last_name','$this->password','$this->birthdate','$this->address','$this->phone_number',
     '$this->sex','$this->start_date','$this->wage','$this->hours','$this->SIN','$this->user_id')";

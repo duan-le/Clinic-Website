@@ -25,6 +25,10 @@
         }
 
         public function insert() {
+          if (
+            $this->name == null ||
+            $this->price == null
+          ) return false;
             $this->strip();
             $query = "CALL service_insert('$this->name','$this->price')";
             $stmt = $this->conn->prepare($query);
@@ -41,6 +45,10 @@
         }
 
         public function update() {
+          if (
+            $this->name == null ||
+            $this->price == null
+          ) return false;
           $this->strip();
           $query = "CALL service_update('$this->price','$this->name')";
           $stmt = $this->conn->prepare($query);

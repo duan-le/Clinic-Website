@@ -30,6 +30,10 @@
 
         public function insert()
         {
+          if (
+            $this->product_id == null ||
+            $this->user_id == null
+          ) return false;
             $this->strip();
             $query = "CALL purchasedby_insert('$this->product_id','$this->user_id')";
             $stmt = $this->conn->prepare($query);

@@ -25,6 +25,10 @@
 		}
 
 		public function insert() {
+			if (
+				$this->month == null ||
+				$this->year == null
+			) return false;
 			$this->strip();
 			$query = "CALL calendar_insert('$this->month','$this->year')";
 			$stmt = $this->conn->prepare($query);

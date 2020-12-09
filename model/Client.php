@@ -31,6 +31,15 @@
     }
 
     public function insert() {
+      if (
+        $this->first_name == null ||
+        $this->last_name == null ||
+        $this->password == null ||
+        $this->birthdate == null ||
+        $this->address == null ||
+        $this->phone_number == null ||
+        $this->sex == null
+			) return false;
       $this->strip();
       $query = "CALL client_insert('$this->first_name','$this->last_name','$this->password','$this->birthdate','$this->address','$this->phone_number','$this->sex')";
       $stmt = $this->conn->prepare($query);
@@ -48,6 +57,16 @@
     }
 
     public function update() {
+      if (
+				$this->user_id == null ||
+        $this->first_name == null ||
+        $this->last_name == null ||
+        $this->password == null ||
+        $this->birthdate == null ||
+        $this->address == null ||
+        $this->phone_number == null ||
+        $this->sex == null
+			) return false;
       $this->strip();
       $query = "CALL client_update('$this->first_name','$this->last_name','$this->password','$this->birthdate','$this->address','$this->phone_number','$this->sex','$this->user_id')";
       $stmt = $this->conn->prepare($query);

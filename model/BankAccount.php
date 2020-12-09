@@ -26,6 +26,11 @@
 		}
 
 		public function insert() {
+			if (
+				$this->account_number == null ||
+				$this->account_type == null ||
+				$this->employee_id == null
+			) return false;
 			$this->strip();
 			$query = "CALL bankaccount_insert('$this->account_number','$this->account_type','$this->employee_id')";
 			$stmt = $this->conn->prepare($query);
@@ -43,6 +48,11 @@
 		}
 
 		public function update() {
+			if (
+				$this->account_number == null ||
+				$this->account_type == null ||
+				$this->employee_id == null
+			) return false;
 			$this->strip();
 			$query = "CALL bankaccount_update('$this->account_number','$this->account_type','$this->employee_id')";
 			$stmt = $this->conn->prepare($query);

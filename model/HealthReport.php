@@ -25,6 +25,10 @@
 		}
 
     public function insert() {
+			if (
+				$this->client_id == null ||
+				$this->date == null
+			) return false;
       $this->strip();
       $query = "CALL healthreport_insert('$this->client_id','$this->date')";
 			$stmt = $this->conn->prepare($query);

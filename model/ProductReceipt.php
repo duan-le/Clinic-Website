@@ -25,6 +25,10 @@
 		}
 
 		public function insert() {
+			if (
+				$this->product_id == null ||
+				$this->receipt_number == null
+			) return false;
 			$this->strip();
 			$query = "CALL productreceipt_insert('$this->product_id','$this->receipt_number')";
 			$stmt = $this->conn->prepare($query);

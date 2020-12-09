@@ -31,6 +31,15 @@
 		}
 
 		public function insert() {
+			if (
+				$this->day == null ||
+				$this->month == null ||
+				$this->year == null ||
+				$this->time == null ||
+				$this->client_id == null ||
+				$this->employee_id == null ||
+				$this->service_name == null
+			) return false;
 			$this->strip();
       $query = "CALL appointment_insert('$this->day','$this->month','$this->year','$this->time','$this->client_id','$this->employee_id','$this->service_name')";
       $stmt = $this->conn->prepare($query);
@@ -47,7 +56,17 @@
 		}
 
 		public function update() {
-      $this->strip();
+			if (
+				$this->appoint_id == null ||
+				$this->day == null ||
+				$this->month == null ||
+				$this->year == null ||
+				$this->time == null ||
+				$this->client_id == null ||
+				$this->employee_id == null ||
+				$this->service_name == null
+			) return false;
+			$this->strip();
       $query = "CALL appointment_update('$this->day','$this->month','$this->year','$this->time','$this->client_id','$this->employee_id','$this->service_name','$this->appoint_id')";
 			$stmt = $this->conn->prepare($query);
 			try {
