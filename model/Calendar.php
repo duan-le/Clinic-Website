@@ -10,7 +10,7 @@
 		}
 
 		public function view() {
-			$query = "CALL calendar_view('$this->year')";
+			$query = "CALL calendar_view()";
 			$stmt = $this->conn->prepare($query);
 			$stmt->execute();
 			return $stmt;

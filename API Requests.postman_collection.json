@@ -1549,7 +1549,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/massageclinic/api/purchasedby/search.php?product_id=1",
+							"raw": "http://localhost/massageclinic/api/purchasedby/search.php?user_id=2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1562,8 +1562,8 @@
 							],
 							"query": [
 								{
-									"key": "product_id",
-									"value": "1"
+									"key": "user_id",
+									"value": "2"
 								}
 							]
 						}
@@ -1576,7 +1576,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/massageclinic/api/purchasedby/search.php?product_id=-1",
+							"raw": "http://localhost/massageclinic/api/purchasedby/search.php?user_id=-1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1589,7 +1589,7 @@
 							],
 							"query": [
 								{
-									"key": "product_id",
+									"key": "user_id",
 									"value": "-1"
 								}
 							]
