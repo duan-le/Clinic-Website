@@ -22,7 +22,7 @@
         public function search()
         {
             $this->strip();
-            $query = "CALL purchasedby_search('$this->product_id')";
+            $query = "CALL purchasedby_search('$this->user_id')";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt;

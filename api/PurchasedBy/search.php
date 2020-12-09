@@ -9,7 +9,7 @@
   $db = $database->connect();
 
   $pb = new PurchasedBy($db);
-  $pb->product_id = isset($_GET['product_id']) ? $_GET['product_id'] : die();
+  $pb->user_id = isset($_GET['user_id']) ? $_GET['user_id'] : die();
   $result = $pb->search();
   $num = $result->rowCount();
   $rows = $result->fetchAll(\PDO::FETCH_ASSOC);
