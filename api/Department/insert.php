@@ -12,7 +12,6 @@
 
   $department = new Department($db);
   $data = json_decode(file_get_contents("php://input"));
-  $department->dnumber = $data->dnumber;
   $department->type = $data->type;
 
   if ($department->insert()) {

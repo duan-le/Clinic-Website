@@ -4,7 +4,7 @@
     private $host = 'localhost';
     private $db_name = 'massage_clinic';
     private $username = 'root';
-    private $password = 'walkmans';
+    private $password = 'password';
     private $conn;
     // DB Connect
     public function connect() {

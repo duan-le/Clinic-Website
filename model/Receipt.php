@@ -27,7 +27,7 @@
         public function insert()
         {
             $this->strip();
-            $query = "CALL receipt_insert('$this->number','$this->date')";
+            $query = "CALL receipt_insert('$this->date')";
             $stmt = $this->conn->prepare($query);
             try {
 				$stmt->execute();

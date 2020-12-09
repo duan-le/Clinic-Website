@@ -27,7 +27,7 @@
 
       public function insert(){
             $this->strip();
-            $query = "CALL department_insert('$this->dnumber','$this->type')";
+            $query = "CALL department_insert('$this->type')";
             $stmt = $this->conn->prepare($query);
 
             try {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 09, 2020 at 06:14 AM
+-- Generation Time: Dec 09, 2020 at 06:55 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -29,8 +29,8 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `appointment_delete` (IN `ai` INT(11))  MODIFIES SQL DATA
 DELETE FROM appointment WHERE appoint_id = ai$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `appointment_insert` (IN `ai` INT(11), IN `d` INT(11), IN `m` VARCHAR(45), IN `y` VARCHAR(45), IN `t` VARCHAR(45), IN `ci` INT(11), IN `ei` INT(11), IN `sn` VARCHAR(45))  MODIFIES SQL DATA
-INSERT INTO appointment SET appoint_id = ai, day = d, month = m, year = y, time = t, client_id = ci, employee_id = ei, service_name = sn$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `appointment_insert` (IN `d` INT(11), IN `m` VARCHAR(45), IN `y` VARCHAR(45), IN `t` VARCHAR(45), IN `ci` INT(11), IN `ei` INT(11), IN `sn` VARCHAR(45))  MODIFIES SQL DATA
+INSERT INTO appointment SET day = d, month = m, year = y, time = t, client_id = ci, employee_id = ei, service_name = sn$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `appointment_search` (IN `ai` INT(11))  READS SQL DATA
 SELECT * FROM appointment WHERE appoint_id = ai$$
@@ -71,8 +71,8 @@ SELECT * FROM calendar$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `client_delete` (IN `ui` INT(11))  MODIFIES SQL DATA
 DELETE FROM client WHERE user_id = ui$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `client_insert` (IN `ui` INT(11), IN `fn` VARCHAR(45), IN `ln` VARCHAR(45), IN `p` VARCHAR(45), IN `bd` VARCHAR(45), IN `ad` VARCHAR(45), IN `pn` VARCHAR(45), IN `s` VARCHAR(45))  MODIFIES SQL DATA
-INSERT INTO client SET user_id = ui, first_name = fn, last_name = ln, password = p, birthdate = bd, address = ad, phone_number = pn, sex = s$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `client_insert` (IN `fn` VARCHAR(45), IN `ln` VARCHAR(45), IN `p` VARCHAR(45), IN `bd` VARCHAR(45), IN `ad` VARCHAR(45), IN `pn` VARCHAR(45), IN `s` VARCHAR(45))  MODIFIES SQL DATA
+INSERT INTO client SET first_name = fn, last_name = ln, password = p, birthdate = bd, address = ad, phone_number = pn, sex = s$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `client_search` (IN `ui` INT(11))  READS SQL DATA
 SELECT * FROM client WHERE user_id = ui$$
@@ -86,8 +86,8 @@ SELECT * FROM client$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `department_delete` (IN `dn` INT(11))  MODIFIES SQL DATA
 DELETE FROM department WHERE dnumber = dn$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `department_insert` (IN `dn` INT(11), IN `t` VARCHAR(45))  MODIFIES SQL DATA
-INSERT INTO department SET dnumber = dn, type = t$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `department_insert` (IN `t` VARCHAR(45))  MODIFIES SQL DATA
+INSERT INTO department SET type = t$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `department_search` (IN `dn` INT(11))  READS SQL DATA
 SELECT * FROM department WHERE dnumber = dn$$
@@ -101,8 +101,8 @@ SELECT * FROM department$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `employee_delete` (IN `ui` INT(11))  MODIFIES SQL DATA
 DELETE FROM employee WHERE user_id = ui$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `employee_insert` (IN `ui` INT(11), IN `fn` VARCHAR(45), IN `ln` VARCHAR(45), IN `p` VARCHAR(45), IN `bd` VARCHAR(45), IN `ad` VARCHAR(45), IN `pn` VARCHAR(45), IN `s` VARCHAR(45), IN `sd` VARCHAR(45), IN `w` INT(11), IN `h` INT(11), IN `sin` INT(11))  MODIFIES SQL DATA
-INSERT INTO employee SET user_id = ui, first_name = fn, last_name = ln, password = p, birthdate = bd, address = ad, phone_number = pn, sex = s, start_date = sd, wage = w, hours = h, SIN = sin$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `employee_insert` (IN `fn` VARCHAR(45), IN `ln` VARCHAR(45), IN `p` VARCHAR(45), IN `bd` VARCHAR(45), IN `ad` VARCHAR(45), IN `pn` VARCHAR(45), IN `s` VARCHAR(45), IN `sd` VARCHAR(45), IN `w` INT(11), IN `h` INT(11), IN `sin` INT(11))  MODIFIES SQL DATA
+INSERT INTO employee SET first_name = fn, last_name = ln, password = p, birthdate = bd, address = ad, phone_number = pn, sex = s, start_date = sd, wage = w, hours = h, SIN = sin$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `employee_search` (IN `ui` INT(11))  READS SQL DATA
 SELECT * FROM employee WHERE user_id = ui$$
@@ -140,8 +140,8 @@ SELECT * FROM product_receipt$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `product_delete` (IN `pi` INT(11))  MODIFIES SQL DATA
 DELETE FROM product WHERE product_id = pi$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `product_insert` (IN `pi` INT(11), IN `n` VARCHAR(45), IN `p` DOUBLE)  MODIFIES SQL DATA
-INSERT INTO product SET product_id = pi, name = n, price = p$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `product_insert` (IN `n` VARCHAR(45), IN `p` DOUBLE)  MODIFIES SQL DATA
+INSERT INTO product SET name = n, price = p$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `product_search` (IN `pi` INT(11))  READS SQL DATA
 SELECT * FROM product WHERE product_id = pi$$
@@ -167,8 +167,8 @@ SELECT * FROM purchased_by$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `receipt_delete` (IN `n` INT(11))  MODIFIES SQL DATA
 DELETE FROM receipt WHERE number = n$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `receipt_insert` (IN `n` INT(11), IN `d` VARCHAR(45))  MODIFIES SQL DATA
-INSERT INTO receipt SET number = n, date = d$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `receipt_insert` (IN `d` VARCHAR(45))  MODIFIES SQL DATA
+INSERT INTO receipt SET date = d$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `receipt_search` (IN `n` INT(11))  READS SQL DATA
 SELECT * FROM receipt WHERE number = n$$
@@ -328,7 +328,8 @@ CREATE TABLE `client` (
 
 INSERT INTO `client` (`user_id`, `first_name`, `last_name`, `password`, `birthdate`, `address`, `phone_number`, `sex`) VALUES
 (1, 'Kyle', 'Lowry', 'phat', '05/05/1980', '312 Phat Blvd', '1324657980', 'M'),
-(2, 'Serge', 'Ibaka', 'hellothere', '01/01/2000', '159 Clippers Lane', '9876543210', 'M');
+(2, 'Serge', 'Ibaka', 'hellothere', '01/01/2000', '159 Clippers Lane', '9876543210', 'M'),
+(27, 'Bob', 'Builder', 'yay', '03/03/2021', '321 Builder St', '3321312312', 'M');
 
 -- --------------------------------------------------------
 
@@ -649,25 +650,25 @@ ALTER TABLE `service_receipt`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `appoint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `appoint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `dnumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `dnumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -679,7 +680,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `receipt`
 --
 ALTER TABLE `receipt`
-  MODIFY `number` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `number` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

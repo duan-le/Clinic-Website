@@ -32,7 +32,7 @@
 
     public function insert() {
       $this->strip();
-      $query = "CALL client_insert('$this->user_id','$this->first_name','$this->last_name','$this->password','$this->birthdate','$this->address','$this->phone_number','$this->sex')";
+      $query = "CALL client_insert('$this->first_name','$this->last_name','$this->password','$this->birthdate','$this->address','$this->phone_number','$this->sex')";
       $stmt = $this->conn->prepare($query);
 
       try {

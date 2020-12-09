@@ -12,7 +12,6 @@
 	$receipt = new Receipt($db);
   $data = json_decode(file_get_contents("php://input"));
 
-  $receipt->number = $data->number;
   $receipt->date = $data->date;
 
   if ($receipt->insert()) {

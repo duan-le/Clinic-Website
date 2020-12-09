@@ -12,7 +12,6 @@
 	$appointment = new Appointment($db);
   $data = json_decode(file_get_contents("php://input"));
 
-  $appointment->appoint_id = $data->appoint_id;
   $appointment->day = $data->day;
   $appointment->month= $data->month;
   $appointment->year = $data->year;

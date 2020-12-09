@@ -31,8 +31,8 @@
 		}
 
 		public function insert() {
-      $this->strip();
-      $query = "CALL appointment_insert('$this->appoint_id','$this->day','$this->month','$this->year','$this->time','$this->client_id','$this->employee_id','$this->service_name')";
+			$this->strip();
+      $query = "CALL appointment_insert('$this->day','$this->month','$this->year','$this->time','$this->client_id','$this->employee_id','$this->service_name')";
       $stmt = $this->conn->prepare($query);
 			try {
 				$stmt->execute();

@@ -32,7 +32,7 @@
         public function insert()
         {
             $this->strip();
-            $query = "CALL product_insert('$this->product_id','$this->name','$this->price')";
+            $query = "CALL product_insert('$this->name','$this->price')";
             $stmt = $this->conn->prepare($query);
             try {
 				$stmt->execute();
