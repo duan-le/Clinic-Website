@@ -42,7 +42,8 @@ class Employee
   public function insert()
   {
     $this->strip();
-    $query = "CALL employee_insert('$this->first_name','$this->last_name','$this->password','$this->birthdate','$this->address','$this->phone_number', '$this->sex','$this->start_date,'$this->wage,'$this->hours,'$this->SIN)";
+    $query = "CALL employee_insert('$this->first_name','$this->last_name','$this->password','$this->birthdate','$this->address','$this->phone_number',
+    '$this->sex','$this->start_date','$this->wage','$this->hours','$this->SIN')";
     $stmt = $this->conn->prepare($query);
 
     try {
@@ -61,7 +62,7 @@ class Employee
   {
     $this->strip();
     $query = "CALL employee_update('$this->first_name','$this->last_name','$this->password','$this->birthdate','$this->address','$this->phone_number',
-    '$this->sex','$this->start_date,'$this->wage,'$this->hours,'$this->SIN,'$this->user_id')";
+    '$this->sex','$this->start_date','$this->wage','$this->hours','$this->SIN','$this->user_id')";
     $stmt = $this->conn->prepare($query);
 
     try {
