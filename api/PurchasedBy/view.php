@@ -11,21 +11,6 @@
   $pb = new PurchasedBy($db);
   $result = $pb->view();
   $num = $result->rowCount();
-
-  if($num > 0) {
-    $pb_arr = array();
-    $pb_arr['data'] = array();
-    while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-      extract($row);
-      $pb_item = array(
-        'product_id' => $product_id,
-        'user_id' => $user_id
-      );
-      array_push($pb_arr['data'], $pb_item);
-    }
-    echo json_encode($pb_arr);
-  } else {
-    echo json_encode(
-      array('message' => 'No Purchased By Found')
-    );
-  }
+  $rows = $result->fetchAll(\PDO::FETCH_ASSOC);
+  if($num > 0) echo json_encode($rows);
+  else echo json_encode(array('message' => 'No Purchased By Found'));

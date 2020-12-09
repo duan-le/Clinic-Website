@@ -2,7 +2,6 @@
     class PurchasedBy
     {
         private $conn;
-        private $table = 'purchased_by';
 
         public $product_id;
         public $user_id;
@@ -14,8 +13,7 @@
 
         public function view()
         {
-            $query = 'SELECT *
-                FROM ' . $this->table;
+            $query = "CALL purchasedby_view()";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt;
@@ -23,24 +21,18 @@
 
         public function search()
         {
-            $query = 'SELECT *
-                FROM ' . $this->table . ' WHERE product_id = ?';
+            $this->strip();
+            $query = "CALL purchasedby_search('$this->product_id')";
             $stmt = $this->conn->prepare($query);
-            $stmt->bindParam(1, $this->product_id);
             $stmt->execute();
             return $stmt;
         }
 
         public function insert()
         {
-            $query = 'INSERT INTO ' . $this->table . '
-                        SET product_id = ?,
-                            user_id = ?';
+            $this->strip();
+            $query = "CALL purchasedby_insert('$this->product_id','$this->user_id')";
             $stmt = $this->conn->prepare($query);
-            $this->product_id = htmlspecialchars(strip_tags($this->product_id));
-            $this->user_id = htmlspecialchars(strip_tags($this->user_id));
-            $stmt->bindParam(1, $this->product_id);
-            $stmt->bindParam(2, $this->user_id);
             try {
 				$stmt->execute();
 				if ($stmt->rowCount()) {
@@ -55,13 +47,9 @@
 
         public function delete()
         {
-            $query = 'DELETE FROM ' . $this->table . '
-                WHERE product_id = ? AND user_id = ?';
-            $stmt = $this->conn->prepare($query);
-            $this->product_id = htmlspecialchars(strip_tags($this->product_id));
-            $this->user = htmlspecialchars(strip_tags($this->user_id));
-            $stmt->bindParam(1, $this->product_id);
-            $stmt->bindParam(2, $this->user_id);
+          $this->strip();
+          $query = "CALL purchasedby_delete('$this->product_id','$this->user_id')";
+          $stmt = $this->conn->prepare($query);
             try {
 				$stmt->execute();
 				if ($stmt->rowCount()) {
@@ -73,4 +61,8 @@
 				return false;
 			}
         }
+      public function strip(){
+        $this->product_id = htmlspecialchars(strip_tags($this->product_id));
+        $this->user = htmlspecialchars(strip_tags($this->user_id));
+      }
     }

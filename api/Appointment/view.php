@@ -11,28 +11,6 @@
 
 	$result = $appointment->view();
   $num = $result->rowCount();
-
-  if ($num > 0) {
-		$appoint_arr = array();
-		$appoint_arr['data'] = array();
-
-		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-			extract($row);
-			$appoint_item = array(
-				'appoint_id' => $appoint_id,
-				'day' => $day,
-				'month' => $month,
-        'year' => $year,
-        'time' => $time,
-        'client_id' => $client_id,
-        'employee_id' => $employee_id,
-        'service_name' => $service_name
-			);
-			array_push($appoint_arr['data'], $appoint_item);
-		}
-		echo json_encode($appoint_arr);
-  } else {
-		echo json_encode(
-			array('message' => 'No Appointment Found')
-		);
-	}
+  $rows = $result->fetchAll(\PDO::FETCH_ASSOC);
+  if($num > 0) echo json_encode($rows);
+  else echo json_encode(array('message' => 'No Appointment Found'));

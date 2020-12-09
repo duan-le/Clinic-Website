@@ -12,22 +12,6 @@
   $receipt->number = isset($_GET['number']) ? $_GET['number'] : die();
 	$result = $receipt->search();
   $num = $result->rowCount();
-
-  if ($num > 0) {
-		$r_arr = array();
-		$r_arr['data'] = array();
-
-		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-			extract($row);
-			$r_item = array(
-				'number' => $number,
-				'date' => $date
-			);
-			array_push($r_arr['data'], $r_item);
-		}
-		echo json_encode($r_arr);
-  } else {
-		echo json_encode(
-			array('message' => 'No Receipts Found')
-		);
-	}
+  $rows = $result->fetchAll(\PDO::FETCH_ASSOC);
+  if($num > 0) echo json_encode($rows);
+  else echo json_encode(array('message' => 'No Receipts Found'));

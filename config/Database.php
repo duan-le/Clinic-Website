@@ -4,7 +4,7 @@
     private $host = 'localhost';
     private $db_name = 'massage_clinic';
     private $username = 'root';
-    private $password = 'password';
+    private $password = 'walkmans';
     private $conn;
     // DB Connect
     public function connect() {
@@ -15,7 +15,7 @@
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       } catch(PDOException $e) {
         echo 'Connection Error: ' . $e->getMessage();
-	      include('db_error.php');
+	include('db_error.php');
       }
       return $this->conn;
     }

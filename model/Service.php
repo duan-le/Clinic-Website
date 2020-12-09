@@ -1,7 +1,6 @@
 <?php
     class Service {
         private $conn;
-        private $table = 'service';
 
         public $name;
         public $price;
@@ -11,27 +10,24 @@
         }
 
         public function view() {
-            $query = 'SELECT * FROM ' . $this->table;
+            $query = "CALL service_view()";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt;
         }
 
         public function search() {
-            $query = 'SELECT * FROM ' . $this->table . ' WHERE name = ?';
+            $this->strip();
+            $query = "CALL service_search('$this->name')";
             $stmt = $this->conn->prepare($query);
-            $stmt->bindParam(1, $this->name);
             $stmt->execute();
             return $stmt;
         }
 
         public function insert() {
-            $query = 'INSERT INTO ' . $this->table . ' SET name = :name, price = :price';
+            $this->strip();
+            $query = "CALL service_insert('$this->name','$this->price')";
             $stmt = $this->conn->prepare($query);
-            $this->name = htmlspecialchars(strip_tags($this->name));
-            $this->price = htmlspecialchars(strip_tags($this->price));
-            $stmt->bindParam(':name', $this->name);
-            $stmt->bindParam(':price', $this->price);
             try {
 				$stmt->execute();
 				if ($stmt->rowCount()) {
@@ -45,12 +41,9 @@
         }
 
         public function update() {
-            $query = 'UPDATE ' . $this->table . ' SET price = :price WHERE name = :name';
-            $stmt = $this->conn->prepare($query);
-            $this->name = htmlspecialchars(strip_tags($this->name));
-            $this->price = htmlspecialchars(strip_tags($this->price));
-            $stmt->bindParam(':name', $this->name);
-            $stmt->bindParam(':price', $this->price);
+          $this->strip();
+          $query = "CALL service_update('$this->price','$this->name')";
+          $stmt = $this->conn->prepare($query);
             try {
 				$stmt->execute();
 				if ($stmt->rowCount()) {
@@ -64,10 +57,9 @@
         }
 
         public function delete() {
-            $query = 'DELETE FROM ' . $this->table . ' WHERE name = :name';
-            $stmt = $this->conn->prepare($query);
-            $this->name = htmlspecialchars(strip_tags($this->name));
-            $stmt->bindParam(':name', $this->name);
+          $this->strip();
+          $query = "CALL service_delete('$this->name')";
+          $stmt = $this->conn->prepare($query);
             try {
 				$stmt->execute();
 				if ($stmt->rowCount()) {
@@ -79,4 +71,8 @@
 				return false;
 			}
         }
+      public function strip(){
+        $this->name = htmlspecialchars(strip_tags($this->name));
+        $this->price = htmlspecialchars(strip_tags($this->price));
+      }
     }

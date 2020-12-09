@@ -1,37 +1,34 @@
 <?php
 	class Calendar {
 		private $conn;
-		private $table = 'calendar';
-		
+
 		public $month;
 		public $year;
 
 		public function __construct($db) {
       $this->conn = $db;
 		}
-		
+
 		public function view() {
-			$query = 'SELECT * FROM ' . $this->table;
+			$query = "CALL calendar_view('$this->year')";
 			$stmt = $this->conn->prepare($query);
 			$stmt->execute();
 			return $stmt;
 		}
 
 		public function search() {
-			$query = 'SELECT * FROM ' . $this->table . ' WHERE year = ?';
+			$this->strip();
+			$query = "CALL calendar_search('$this->year')";
 			$stmt = $this->conn->prepare($query);
-			$stmt->bindParam(1, $this->year);
 			$stmt->execute();
 			return $stmt;
 		}
 
 		public function insert() {
-			$query = 'INSERT INTO ' . $this->table . ' SET month = ?, year = ?';
+			$this->strip();
+			$query = "CALL calendar_insert('$this->month','$this->year')";
 			$stmt = $this->conn->prepare($query);
-			$this->month = htmlspecialchars(strip_tags($this->month));
-			$this->year = htmlspecialchars(strip_tags($this->year));
-			$stmt->bindParam(1, $this->month);
-			$stmt->bindParam(2, $this->year);
+
 			try {
 				$stmt->execute();
 				if ($stmt->rowCount()) {
@@ -45,12 +42,10 @@
 		}
 
 		public function delete() {
-			$query = 'DELETE FROM ' . $this->table . ' WHERE month = ? AND year = ?';
+			$this->strip();
+			$query = "CALL calendar_delete('$this->month','$this->year')";
 			$stmt = $this->conn->prepare($query);
-			$this->month = htmlspecialchars(strip_tags($this->month));
-			$this->year = htmlspecialchars(strip_tags($this->year));
-			$stmt->bindParam(1, $this->month);
-			$stmt->bindParam(2, $this->year);
+
 			try {
 				$stmt->execute();
 				if ($stmt->rowCount()) {
@@ -61,5 +56,9 @@
 				echo ($e->getMessage());
 				return false;
 			}
+		}
+		public function strip(){
+			$this->month = htmlspecialchars(strip_tags($this->month));
+			$this->year = htmlspecialchars(strip_tags($this->year));
 		}
 	}

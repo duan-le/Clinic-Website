@@ -11,25 +11,6 @@
   $department = new Department($db);
   $result = $department->view();
   $num = $result->rowCount();
-
-  if($num > 0) {
-    $department_arr = array();
-    $department_arr['data'] = array();
-
-    while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-      extract($row);
-
-      $department_item = array(
-        'dnumber' => $dnumber,
-        'type' => $type
-      );
-
-      array_push($department_arr['data'], $department_item);
-    }
-
-    echo json_encode($department_arr);
-  } else {
-    echo json_encode(
-      array('message' => 'No Department Found')
-    );
-  }
+  $rows = $result->fetchAll(\PDO::FETCH_ASSOC);
+  if($num > 0) echo json_encode($rows);
+  else echo json_encode(array('message' => 'No Department Found'));

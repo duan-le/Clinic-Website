@@ -2,7 +2,6 @@
     class Product
     {
         private $conn;
-        private $table = 'product';
 
         public $product_id;
         public $name;
@@ -15,8 +14,7 @@
 
         public function view()
         {
-            $query = 'SELECT *
-                FROM ' . $this->table;
+            $query = "CALL product_view()";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt;
@@ -24,29 +22,18 @@
 
         public function search()
         {
-            $query = 'SELECT *
-                FROM ' . $this->table . '
-                WHERE product_id = ?';
+            $this->strip();
+            $query = "CALL product_search('$this->product_id')";
             $stmt = $this->conn->prepare($query);
-            $stmt->bindParam(1, $this->product_id);
             $stmt->execute();
             return $stmt;
         }
 
         public function insert()
         {
-            $query = 'INSERT INTO ' . $this->table . '
-                        SET product_id = :product_id,
-                            name = :name,
-                            price = :price';
+            $this->strip();
+            $query = "CALL product_insert('$this->product_id','$this->name','$this->price')";
             $stmt = $this->conn->prepare($query);
-            $stmt = $this->conn->prepare($query);
-            $this->product_id = htmlspecialchars(strip_tags($this->product_id));
-            $this->name = htmlspecialchars(strip_tags($this->name));
-            $this->price = htmlspecialchars(strip_tags($this->price));
-            $stmt->bindParam(':product_id', $this->product_id);
-            $stmt->bindParam(':name', $this->name);
-            $stmt->bindParam(':price', $this->price);
             try {
 				$stmt->execute();
 				if ($stmt->rowCount()) {
@@ -61,17 +48,10 @@
 
         public function update()
         {
-            $query = 'UPDATE ' . $this->table . '
-                SET name = :name,
-                    price = :price
-                WHERE product_id = :product_id';
-            $stmt = $this->conn->prepare($query);
-            $this->product_id = htmlspecialchars(strip_tags($this->product_id));
-            $this->name = htmlspecialchars(strip_tags($this->name));
-            $this->price = htmlspecialchars(strip_tags($this->price));
-            $stmt->bindParam(':product_id', $this->product_id);
-            $stmt->bindParam(':name', $this->name);
-            $stmt->bindParam(':price', $this->price);
+          $this->strip();
+          $query = "CALL product_update('$this->name','$this->price','$this->product_id')";
+          $stmt = $this->conn->prepare($query);
+
             try {
 				$stmt->execute();
 				if ($stmt->rowCount()) {
@@ -86,11 +66,9 @@
 
         public function delete()
         {
-            $query = 'DELETE FROM ' . $this->table . '
-                WHERE product_id = :product_id';
+            $this->strip();
+            $query = "CALL product_delete('$this->product_id')";
             $stmt = $this->conn->prepare($query);
-            $this->product_id = htmlspecialchars(strip_tags($this->product_id));
-            $stmt->bindParam(':product_id', $this->product_id);
             try {
 				$stmt->execute();
 				if ($stmt->rowCount()) {
@@ -102,4 +80,11 @@
 				return false;
 			}
         }
+      public function strip()
+      {
+        $this->product_id = htmlspecialchars(strip_tags($this->product_id));
+        $this->name = htmlspecialchars(strip_tags($this->name));
+        $this->price = htmlspecialchars(strip_tags($this->price));
+      }
+
     }
