@@ -1,0 +1,19 @@
+body {
+  font-family: 'Montserrat';
+  margin-top: 12rem;
+}
+
+.navbar {
+  border-bottom: 0.1rem solid black;
+  font-weight: 700;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.nav-link {
+  color: black !important;
+}
+
+.nav-link:hover {
+  color: #006d77 !important;
+}

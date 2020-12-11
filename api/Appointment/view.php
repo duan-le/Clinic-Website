@@ -7,7 +7,7 @@
 
   $database = new Database();
   $db = $database->connect();
-	$appointment = new Appointment($db);
+  $appointment = new Appointment($db);
 
 	$result = $appointment->view();
   $num = $result->rowCount();
