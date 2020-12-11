@@ -1,4 +1,6 @@
 <?php
+  session_start();
+
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
   header('Access-Control-Allow-Methods: POST');
@@ -7,30 +9,38 @@
   include_once '../../config/Database.php';
   include_once '../../model/Employee.php';
 
-  $database = new Database();
-  $db = $database->connect();
+  if (isset($_SESSION['user_id'])
+    && isset($_SESSION['user_type'])
+    && $_SESSION['user_type'] == 'admin'
+  ) {
+    $database = new Database();
+    $db = $database->connect();
 
-  $employee = new Employee($db);
-  $data = json_decode(file_get_contents("php://input"));
+    $employee = new Employee($db);
+    $data = json_decode(file_get_contents("php://input"));
 
-  $employee->first_name = $data->first_name;
-  $employee->last_name = $data->last_name;
-  $employee->password = $data->password;
-  $employee->birthdate = $data->birthdate;
-  $employee->address = $data->address;
-  $employee->phone_number = $data->phone_number;
-  $employee->sex = $data->sex;
-  $employee->start_date = $data->start_date;
-  $employee->wage = $data->wage;
-  $employee->hours = $data->hours;
-  $employee->SIN = $data->SIN;
+    $employee->first_name = $data->first_name;
+    $employee->last_name = $data->last_name;
+    $employee->password = $data->password;
+    $employee->birthdate = $data->birthdate;
+    $employee->address = $data->address;
+    $employee->phone_number = $data->phone_number;
+    $employee->sex = $data->sex;
+    $employee->start_date = $data->start_date;
+    $employee->wage = $data->wage;
+    $employee->hours = $data->hours;
+    $employee->SIN = $data->SIN;
 
-  if($employee->insert()) {
-    echo json_encode(
-      array('message' => 'Employee Created')
-    );
+    if($employee->insert()) {
+      echo json_encode(
+        array('message' => 'Employee Created')
+      );
+    } else {
+      echo json_encode(
+        array('message' => 'Employee Not Created')
+      );
+    }
   } else {
-    echo json_encode(
-      array('message' => 'Employee Not Created')
-    );
+    http_response_code(401);
+    echo json_encode(array('message' => 'You Are Not Authorized'));
   }

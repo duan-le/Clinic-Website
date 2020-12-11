@@ -22,13 +22,21 @@
 			return $stmt;
 		}
 
-		public function search() {
+		public function clientsearch() {
       $this->strip();
-      $query = "CALL appointment_search('$this->appoint_id')";
+      $query = "CALL appointment_client_search('$this->client_id')";
 			$stmt = $this->conn->prepare($query);
 			$stmt->execute();
 			return $stmt;
 		}
+
+		public function employeesearch() {
+      $this->strip();
+      $query = "CALL appointment_employee_search('$this->employee_id')";
+      $stmt = $this->conn->prepare($query);
+      $stmt->execute();
+      return $stmt;
+    }
 
 		public function insert() {
 			if (

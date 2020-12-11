@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 11, 2020 at 05:35 PM
+-- Generation Time: Dec 11, 2020 at 07:42 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -26,14 +26,17 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `appointment_client_search` (IN `ci` INT(11))  READS SQL DATA
+SELECT * FROM appointment WHERE client_id = ci$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `appointment_delete` (IN `ai` INT(11))  MODIFIES SQL DATA
 DELETE FROM appointment WHERE appoint_id = ai$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `appointment_employee_search` (IN `ei` INT(11))  READS SQL DATA
+SELECT * FROM appointment WHERE employee_id = ei$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `appointment_insert` (IN `d` VARCHAR(45), IN `m` VARCHAR(45), IN `y` VARCHAR(45), IN `t` VARCHAR(45), IN `ci` INT(11), IN `ei` INT(11), IN `sn` VARCHAR(45))  MODIFIES SQL DATA
 INSERT INTO appointment SET day = d, month = m, year = y, time = t, client_id = ci, employee_id = ei, service_name = sn$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `appointment_search` (IN `ai` INT(11))  READS SQL DATA
-SELECT * FROM appointment WHERE appoint_id = ai$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `appointment_update` (IN `d` VARCHAR(45), IN `m` VARCHAR(45), IN `y` VARCHAR(45), IN `t` VARCHAR(45), IN `ci` INT(11), IN `ei` INT(11), IN `sn` VARCHAR(45), IN `ai` INT(11))  MODIFIES SQL DATA
 UPDATE appointment SET day = d, month = m, year = y, time = t, client_id = ci, employee_id = ei, service_name = sn WHERE appoint_id = ai$$
@@ -75,13 +78,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `client_insert` (IN `fn` VARCHAR(45)
 INSERT INTO client SET first_name = fn, last_name = ln, password = p, birthdate = bd, address = ad, phone_number = pn, sex = s$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `client_search` (IN `ui` INT(11))  READS SQL DATA
-SELECT * FROM client WHERE user_id = ui$$
+SELECT first_name, last_name, birthdate, address, phone_number, sex FROM client WHERE user_id = ui$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `client_update` (IN `fn` VARCHAR(45), IN `ln` VARCHAR(45), IN `p` VARCHAR(45), IN `bd` VARCHAR(45), IN `ad` VARCHAR(45), IN `pn` VARCHAR(45), IN `s` VARCHAR(45), IN `ui` INT(11))  MODIFIES SQL DATA
 UPDATE client SET first_name = fn, last_name = ln, password = p, birthdate = bd, address = ad, phone_number = pn, sex = s WHERE user_id = ui$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `client_view` ()  READS SQL DATA
-SELECT * FROM client$$
+SELECT user_id, first_name, last_name, birthdate, address, phone_number, sex FROM client$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `department_delete` (IN `dn` INT(11))  MODIFIES SQL DATA
 DELETE FROM department WHERE dnumber = dn$$
