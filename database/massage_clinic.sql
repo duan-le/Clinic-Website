@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 11, 2020 at 07:59 PM
+-- Generation Time: Dec 11, 2020 at 08:06 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -264,6 +264,7 @@ CREATE TABLE `bank_account` (
 --
 
 INSERT INTO `bank_account` (`account_number`, `account_type`, `employee_id`) VALUES
+(0, 'Chequing', 0),
 (1, 'Chequing', 1),
 (2, 'Savings', 2);
 
@@ -379,7 +380,7 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`user_id`, `first_name`, `last_name`, `password`, `birthdate`, `address`, `phone_number`, `sex`, `start_date`, `wage`, `hours`, `SIN`) VALUES
-(0, 'Admin', 'Admin', 'iamadmin', '12/12/1991', '123 Street', '123-123-1234', 'M', '05/05/2005', 60, 40, 0),
+(0, 'Admin', 'Admin', 'iamadmin', '12/12/1991', '123 Street', '123-123-1234', 'M', '05/05/2005', 60, 40, 555555555),
 (1, 'Jack', 'Jacks', 'workerone', '03/03/1993', '333 Street', '333-333-3333', 'M', '03/03/2003', 30, 15, 333333333),
 (2, 'Jill', 'Jills', 'workertwo', '04/04/1994', '444 Street', '444-444-4444', 'F', '04/04/2004', 35, 20, 444444444);
 
