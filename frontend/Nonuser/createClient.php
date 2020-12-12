@@ -24,7 +24,7 @@ $articles = $result->fetchAll(\PDO::FETCH_ASSOC);
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <!-- My CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../style.css" />
 
   <meta charset="utf-8">
   <title>Client</title>
@@ -34,7 +34,7 @@ $articles = $result->fetchAll(\PDO::FETCH_ASSOC);
 
   <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-white">
     <div class="container">
-      <a class="navbar-brand" href="../home.php">Massage Clinic</a>
+      <a class="navbar-brand" href="home.php">Massage Clinic</a>
 
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-menu">
         <span class="navbar-toggler-icon"></span>
@@ -46,13 +46,13 @@ $articles = $result->fetchAll(\PDO::FETCH_ASSOC);
             <a class="nav-link" href="createClient.php">Client</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="bookAppointment.php">Appointments</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="shop.php">Shop</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="seeServices.php">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.php">Login</a>
           </li>
         </ul>
       </div>

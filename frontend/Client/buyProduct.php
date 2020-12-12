@@ -50,7 +50,7 @@
 
 <body>
   <h1>Products bought</h1>
-  <button onclick="location.href = '../home.php';">Return to homepage</button>
+  <button onclick="location.href = 'home.php';">Return to homepage</button>
 </body>
 
   </html>

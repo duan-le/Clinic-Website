@@ -42,7 +42,7 @@ $articles = $result->fetchAll(\PDO::FETCH_ASSOC);
       <div class="collapse navbar-collapse" id="navbar-collapse-menu">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="bookAppointment.php">Appointments</a>
+            <a class="nav-link" href="createClient.php">Client</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="shop.php">Shop</a>
@@ -51,7 +51,7 @@ $articles = $result->fetchAll(\PDO::FETCH_ASSOC);
             <a class="nav-link" href="seeServices.php">Services</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../logout.php">Logout</a>
+            <a class="nav-link" href="login.php">Login</a>
           </li>
         </ul>
       </div>

@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <!-- My CSS -->
-  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="../home.css" />
 
   <title>Massage Clinic</title>
 
@@ -18,6 +18,7 @@
 </head>
 
 <body>
+  <h1>Welcome, Employee</h1>
   <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-white">
     <div class="container">
       <a class="navbar-brand" href="home.php">Massage Clinic</a>
@@ -29,16 +30,16 @@
       <div class="collapse navbar-collapse" id="navbar-collapse-menu">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="Client/createClient.php">Client</a>
+            <a class="nav-link" href="viewAppointment.php">Appointments</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Client/bookAppointment.php">Appointments</a>
+            <a class="nav-link" href="shop.php">Shop</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Client/shop.php">Shop</a>
+            <a class="nav-link" href="seeServices.php">Services</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Client/seeServices.php">Services</a>
+            <a class="nav-link" href="../logout.php">Logout</a>
           </li>
         </ul>
       </div>
@@ -49,7 +50,7 @@
     <div class="container-fluid no-padding">
       <div class="row">
         <div class="mx-auto d-block">
-          <img src="assets/lake.jpg" alt="placeholder 960" class="img-responsive" />
+          <img src="../assets/lake.jpg" alt="placeholder 960" class="img-responsive" />
         </div>
       </div>
     </div>
